@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>Fxt自动化测试</title>
+<script>
+function r()
+{
+
+var username=document.getElementById("username");
+
+var pass=document.getElementById("password");
+if(username.value=="")
+{
+alert("用户名不能为空");
+username.focus();
+return;
+}
+if(pass.value=="")
+{
+alert("密码不能为空");
+return;
+}
+return true;
+}
+</script>
+</head>
+<body>
+<div align=center>
+<P><b>Fxt自动化测试管理平台</b></P>
+<form >
+<table width="350" bgcolor="#ccffcc"  style="margin:80px">
+<tr><td width="50"></td></tr>
+<tr align=center>
+<td>用户名</td>
+<td>
+<input type="text" name="username" id="username">
+</td>
+</tr>
+<tr align=center><td>密码</td>
+<td>
+<input type="password" name="password" id="password">
+</td>
+</tr>
+<tr align=center><td colspan="2"><input type="button" value="登陆" onclick="r();"/><input type="reset" value="重置"/></td></tr>
+
+</table>
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html>
+
+<head lang="en">
+<meta charset="UTF-8">
+    <title>Fxt自动化测试管理平台</title>
+<!-- 引入jQuery -->
+{#	<script src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>#}
+{#	<script src="http://code.jquery.com/jquery-latest.js"></script>#}
+</head>
+
+<script  type="text/javascript">
+{#    app.config(function($httpProvider)#}
+{#    {#}
+{#    $httpProvider.defaults.headers.post['X-CSRFToken'] = $('meta[name=csrf_token]').attr('content');#}
+{#    }#}
+ function submitForm(){
+    var form = document.getElementById("my_form");//获取form表单对象
+    form.submit();//form表单提交
+ }
+</script>
+
+<script type="text/javascript">
+
+function validate_required(field,alerttxt)
+{
+with (field)
+  {
+  if (field.files[0]==null||field.files[0]=="")
+    {alert(alerttxt);return false}
+  else {
+      alert(field.files[0].name+"上传成功！")
+      return true
+  }
+  }
+ }
+
+function validate_form(thisform)
+{
+with (thisform)
+  {
+  if (validate_required(myfile,"请上传用例文件!")==false)
+    {myfile.focus();return false}
+  }
+ }
+</script>
+
+
+<script type="text/javascript">
+{#    $("#my_form").change(function() {#}
+{#        var zone = $("#my_form").serialize();#}
+{#        console.log(zone);#}
+{##}
+{#        var pathname = window.location.pathname#}
+{#        if(zone){#}
+{#            console.log("ggggggggg")#}
+{#            location.href = pathname + "?" + zone;#}
+{#        }#}
+{#        /*ajax 提交get。#}
+{#        $.ajax({#}
+{#                type: "GET",#}
+{#                async: false,#}
+{#                cache: false,#}
+{#                url: window.location.href ,#}
+{#                data: zone,#}
+{##}
+{#                success: function (data) {#}
+{#                    console.log("good get!!!!")#}
+{##}
+{#                },#}
+{##}
+{#            }#}
+{#        );*/#}
+{##}
+{#    });#}
+</script>
+
+<style type="text/css">
+ table{
+        width: 1024px;
+    }
+  table th{
+            white-space: nowrap;
+        }
+  table td{
+            white-space: nowrap;
+			min-width:50px
+
+        }
+  body,table{
+         font-size:12px;
+        }
+  table{
+         empty-cells:show; 
+         border-collapse: collapse;
+         margin:0 auto;
+        }
+	
+  table,table tr th, table tr td { border:1px solid #0094ff; }
+ 
+  h1,h2,h3{
+   font-size:12px;
+   margin:0;
+   padding:0;
+  }
+  table.tab_css_1{
+   border:1px solid #cad9ea;
+   color:#666;
+  }
+  table.tab_css_1 th {
+   /*background-image: url("th_bg1.gif");*/
+   background-repeat:repeat-x;
+   height:30px;
+  }
+  table.tab_css_1 td,table.tab_css_1 th{
+   border:1px solid #cad9ea;
+   padding:0 1em 0;
+  }
+  table.tab_css_1 tr.tr_css{
+   background-color:#f5fafe;
+   height:30px;
+
+  }
+</style>
+<body>
+<div><b>自动化测试用例</b></div>
+<div>
+ <form action="search" method="get" id="my_form" >
+{#           {% csrf_token %} #}
+     <select select onchange="submitForm();" name="id" style="background:#fff;border:1px solid #ccc;">
+         <option value="all">全部</option>
+         {% for op in bbb %}
+<option value="{{op}}" {%ifequal op ccc%}selected{% endifequal %}>{{op}}</option>
+{%endfor%}
+</select>
+</form>
+
+
+<label>上传用例：</label>
+<form enctype="multipart/form-data" action="" method="post" style="" onsubmit="return validate_form(this)">
+       <input type="file" name="myfile" />
+       <br/>
+       <input type="submit" value="上传"/>
+</form>
+
+{#以下是用django的forms来上传的#}
+{#</form>#}
+{#<form method="post" enctype="multipart/form-data"  id="upload">#}
+{#    {{uf.as_p}}#}
+{#<input type="submit" value="上传"/>#}
+{# </form> #}
+</div>
+<div style=" height:600px; overflow:scroll; overflow:scroll;">
+<table  style="border:1px;border-style: solid;font-size:12px;overflow: auto; width: 1024px;" >
+
+<tr>
+<th>ID</th>
+ <th>TCNO</th>
+ <th>InterfaceName</th>
+ <th>URL</th><th>Method</th>
+ <th>Introduce</th>
+ <th>Priority</th>
+ <th>Flag</th>
+ <th>Parameter</th>
+ <th>Expected</th>
+ <th>Result</th>
+ <th>Comment</th>
+ <th>InterfaceType</th>
+</tr>
+{% for i in string %}
+ <tr  class="" align="center" width="1024px">
+ <td>{{i.id}}</td>
+ <td>{{i.tcno}}</td>
+ <td>{{i.interfacename}}</td>
+ <td>{{i.url}}</td>
+ <td>{{i.method}}</td>
+ <td>{{i.introduce}}</td>
+ <td>{{i.priorty}}</td>
+ <td>{{i.flag}}</td>
+ <td ><div style="font-size:12px;overflow: auto; width:300px; height:100px;display:block;word-break: break-all;word-wrap: break-word;">{{i.parameter}}</div></td>
+ <td>{{i.expected_result}}</td>
+ <td>{{i.testresult}} </td>
+ <td>{{i.comment}}</td>
+ <td>{{i.interfaceid}}</td>
+ </tr>
+{% endfor %}
+</table>
+</div>
+</body>
+</html>
+
+

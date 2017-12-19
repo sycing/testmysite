@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html >
+<head>
+<style type="text/css">
+<!--
+body {
+background: #FFF;
+color: #000;
+font: normal normal 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
+margin: 10px;
+padding: 0
+}
+
+table, td, a {
+color: #000;
+font: normal normal 12px Verdana, Geneva, Arial, Helvetica, sans-serif
+}
+
+.td
+{
+nowrap:’’true’’;
+}
+
+div.tableContainer {
+clear: both;
+border: 1px solid #963;
+height: 285px;
+overflow: auto;
+width: 100%;
+}
+
+/* WinIE 6.x needs to re-account for it’’s scrollbar. Give it some padding */
+\html div.tableContainer/* */ {
+padding: 0 16px 0 0
+}
+
+/* clean up for allowing display Opera 5.x/6.x and MacIE 5.x */
+html>body div.tableContainer {
+height: auto;
+padding: 0;
+width:1020px /*740px*/
+}
+
+/* Reset overflow value to hidden for all non-IE browsers. */
+/* Filter out Opera 5.x/6.x and MacIE 5.x */
+head:first-child+body div[class].tableContainer {
+height: 285px;
+overflow: hidden;
+width: 1024px/*756px*/
+}
+
+/* define width of table. IE browsers only */
+/* if width is set to 100%, you can remove the width */
+/* property from div.tableContainer and have the div scale */
+div.tableContainer table {
+float: left;
+width: 100%
+}
+
+/* WinIE 6.x needs to re-account for padding. Give it a negative margin */
+\html div.tableContainer table/* */ {
+margin: 0 -16px 0 0
+}
+
+/* define width of table. Opera 5.x/6.x and MacIE 5.x */
+html>body div.tableContainer table {
+float: none;
+margin: 0;
+width: 1020px/*740px*/
+}
+
+/* define width of table. Add 16px to width for scrollbar. */
+/* All other non-IE browsers. Filter out Opera 5.x/6.x and MacIE 5.x */
+head:first-child+body div[class].tableContainer table {
+width: 1024px/*756px*/
+}
+
+/* set table header to a fixed position. WinIE 6.x only */
+/* In WinIE 6.x, any element with a position property set to relative and is a child of */
+/* an element that has an overflow property set, the relative value translates into fixed. */
+/* Ex: parent element DIV with a class of tableContainer has an overflow property set to auto */
+thead.fixedHeader tr {
+position: relative;
+/* expression is for WinIE 5.x only. Remove to validate and for pure CSS solution */
+{#top: expression(document.getElementById("tableContainer").scrollTop)#}
+}
+thead.fixedHeader2 tr {
+position: relative;
+/* expression is for WinIE 5.x only. Remove to validate and for pure CSS solution */
+{#bottom: expression(document.getElementById("tableContainer").scrollHeight > document.getElementById("tableContainer").clientHeight ? document.getElementById("tableContainer").scrollHeight - document.getElementById("tableContainer").scrollTop - document.getElementById("tableContainer").clientHeight :0)#}
+}
+
+/* set THEAD element to have block level attributes. All other non-IE browsers */
+/* this enables overflow to work on TBODY element. All other non-IE, non-Mozilla browsers */
+/* Filter out Opera 5.x/6.x and MacIE 5.x */
+head:first-child+body thead[class].fixedHeader tr {
+display: block
+}
+
+/* make the TH elements pretty */
+thead.fixedHeader th {
+background: #C96;
+border-left: 1px solid #EB8;
+border-right: 1px solid #B74;
+border-top: 1px solid #EB8;
+font-weight: normal;
+padding: 4px 3px;
+text-align: center
+}
+/* make the TH elements pretty */
+thead.fixedHeader2 th {
+background: #C96;
+border-left: 1px solid #EB8;
+border-right: 1px solid #B74;
+border-top: 1px solid #EB8;
+font-weight: normal;
+padding: 4px 3px;
+text-align: left
+}
+/* make the A elements pretty. makes for nice clickable headers */
+thead.fixedHeader a, thead.fixedHeader a:link, thead.fixedHeader a:visited {
+color: #FFF;
+display: block;
+text-decoration: none;
+width: 100%
+}
+thead.fixedHeader2 a, thead.fixedHeader2 a:link, thead.fixedHeader a:visited {
+color: #FFF;
+display: block;
+text-decoration: none;
+width: 100%
+}
+
+/* make the A elements pretty. makes for nice clickable headers */
+/* WARNING: swapping the background on hover may cause problems in WinIE 6.x */
+thead.fixedHeader a:hover {
+color: #FFF;
+display: block;
+text-decoration: underline;
+width: 100%
+}
+
+/* define the table content to be scrollable */
+/* set TBODY element to have block level attributes. All other non-IE browsers */
+/* this enables overflow to work on TBODY element. All other non-IE, non-Mozilla browsers */
+/* induced side effect is that child TDs no longer accept width: auto */
+/* Filter out Opera 5.x/6.x and MacIE 5.x */
+head:first-child+body tbody[class].scrollContent {
+display: block;
+height: 262px;
+overflow: auto;
+width: 100%
+}
+
+/* make TD elements pretty. Provide alternating classes for striping the table */
+/* http://www.alistapart.com/articles/zebratables/ */
+tbody.scrollContent td, tbody.scrollContent tr.normalRow td {
+background: #FFF;
+border-bottom: 1px solid #EEE;
+border-left: 1px solid #EEE;
+border-right: 1px solid #AAA;
+border-top: 1px solid #AAA;
+padding: 2px 3px
+}
+
+tbody.scrollContent tr.alternateRow td {
+background: #EEE;
+border-bottom: 1px solid #EEE;
+border-left: 1px solid #EEE;
+border-right: 1px solid #AAA;
+border-top: 1px solid #AAA;
+padding: 2px 3px
+}
+
+/* define width of TH elements: 1st, 2nd, and 3rd respectively. */
+/* All other non-IE browsers. Filter out Opera 5.x/6.x and MacIE 5.x */
+/* Add 16px to last TH for scrollbar padding */
+/* http://www.w3.org/TR/REC-CSS2/selector.html#adjacent-selectors */
+head:first-child+body thead[class].fixedHeader th {
+width: 200px
+}
+
+head:first-child+body thead[class].fixedHeader th + th {
+width: 250px
+}
+
+head:first-child+body thead[class].fixedHeader th + th + th {
+border-right: none;
+padding: 4px 4px 4px 3px;
+width: 316px
+}
+
+/* define width of TH elements: 1st, 2nd, and 3rd respectively. */
+/* All other non-IE browsers. Filter out Opera 5.x/6.x and MacIE 5.x */
+/* Add 16px to last TH for scrollbar padding */
+/* http://www.w3.org/TR/REC-CSS2/selector.html#adjacent-selectors */
+head:first-child+body tbody[class].scrollContent td {
+width: 200px
+}
+
+head:first-child+body tbody[class].scrollContent td + td {
+width: 250px
+}
+
+head:first-child+body tbody[class].scrollContent td + td + td {
+border-right: none;
+padding: 2px 4px 2px 3px;
+width: 300px
+
+/* expression is for WinIE 5.x only. Remove to validate and for pure CSS solution */
+{#top: expression(document.getElementById("tableContainer").scrollTop)#}
+}
+-->
+</style>
+</head><body>
+ <script>
+   function test() {
+    var cH = document.getElementById("tableContainer").clientHeight;
+    var sH = document.getElementById("tableContainer").scrollHeight;
+    var sT = document.getElementById("tableContainer").scrollTop;
+    alert(cH+":"+sH+":"+sT);
+   }
+  </script>
+
+ <div><b>自动化测试用例</b></div>
+
+
+<div >
+    <script  type="text/javascript">
+         function submitForm(){
+    var form = document.getElementById("my_form");//获取form表单对象
+    form.submit();//form表单提交
+}
+     </script>
+
+ <form action="/search" method="get" id="my_form">
+           <!--{% csrf_token %}-->
+     <!--<select onchange="submitForm();" name="kind" style="background:#fff;border:1px solid #ccc;">-->
+                <!--<option value="all"></option>-->
+                <!--<option value="all">默认全部</option>-->
+                <!--<option value="1">文字广告</option>-->
+                <!--<option value="2">头部广告690x80</option>-->
+                <!--<option value="3">侧栏广告270x200</option>-->
+            <!--</select>-->
+     <select select onchange="submitForm();" name="id" style="background:#fff;border:1px solid #ccc;">
+         <option value="all">全部</option>
+
+         {% for op in bbb %}
+<option value="{{op}}" {%ifequal op ccc%}selected{% endifequal %}>{{op}}</option>
+{%endfor%}
+</select>
+
+<!--<input class="form-control" type="hidden" name="id" value=""/>-->
+     <!--<script type="text/javascript">-->
+         <!--function GetCkboxValues() {-->
+             <!--var selectid = document.getElementById("selectid");-->
+             <!--var selectIndex = selectid.selectIndex;-->
+             <!--var selectText = selectid.options[selectIndex].text;-->
+             <!--var inputhd = document.getElementsByName("id")-->
+             <!--var val = inputhd.value = selectText-->
+         <!--}-->
+<!--//    </script>-->
+<!--<input type="submit" value="Search">-->
+</form>
+</div>
+<div id="tableContainer" class="tableContainer">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" class="scrollTable">
+<thead class="fixedHeader">
+<tr>
+<th>ID</th>
+ <th>TCNO</th>
+ <th>InterfaceName</th>
+ <th>URL</th><th>Method</th>
+ <th>Introduce</th>
+ <th>Priority</th>
+ <th>Flag</th>
+ <th>Parameter</th>
+ <th>Expected</th>
+ <th>Result</th>
+ <th>Comment</th>
+ <th>InterfaceType</th>
+</tr>
+</thead>
+<tbody class="scrollContent">
+{% for i in string %}
+ <tr  class="" align="center">
+ <td>{{i.id}}</td>
+ <td>{{i.tcno}}</td>
+ <td>{{i.interfacename}}</td>
+ <td>{{i.url}}</td>
+ <td>{{i.method}}</td>
+ <td>{{i.introduce}}</td>
+ <td>{{i.priorty}}</td>
+ <td>{{i.flag}}</td>
+ <td ><div style="font-size:12px;overflow: auto; width:300px; height:100px;display:block;word-break: break-all;word-wrap: break-word;">{{i.parameter}}</div></td>
+ <td>{{i.expected_result}}</td>
+ <td>{{i.testresult}} </td>
+ <td>{{i.comment}}</td>
+ <td>{{i.interfaceid}}</td>
+ </tr>
+{% endfor %}
+</tbody>
+
+<thead class="fixedHeader2">
+<tr>
+<th><a href="#">合计:</a></th>
+<th colspan=6><a href="#">10000</a></th>
+</tr>
+</thead>
+
+</table>
+</div>
+
+</body></html>
+</html>
